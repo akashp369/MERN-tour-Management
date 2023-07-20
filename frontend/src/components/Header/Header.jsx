@@ -3,6 +3,7 @@ import {Container, Row, Button} from 'reactstrap'
 import {NavLink, Link} from 'react-router-dom'
 
 import logo from '../../assets/images/logo.png'
+import "./header.css"
 
 const nav_links=[
   {
@@ -10,7 +11,7 @@ const nav_links=[
     display:"Home"
   },
   {
-    path:"#",
+    path:"/about",
     display:"About"
   },
   {
@@ -36,7 +37,9 @@ const Header = () => {
               {
                 nav_links.map((item, ind)=>(
                    <li className="nav__item" key={ind}>
-                    <NavLink to={item.path}>{item.display}</NavLink>
+                    <NavLink to={item.path} 
+                    className={navClass=>navClass.isActive?"active__link":""}
+                    >{item.display}</NavLink>
                   </li>
                 ))
               }
