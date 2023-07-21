@@ -1,25 +1,25 @@
 import React from 'react'
 import {Card, CardBody} from 'reactstrap'
 import {Link} from 'react-router-dom'
-
+import calculateAveRating from '../utils/avgRating'
 import './tour.card.css'
 
 
 const TourCard = ({tour}) => {
-  const {id, title, photo, price, featured, avgRating, review, city}=tour
+  const {id, title, photo, price, featured,  reviews, city}=tour
+  const {totalRating, avgRating}=calculateAveRating(reviews)
   return (
     <div className='tour__card'>
       <Card>
         <div className="tour__img">
           <img src={photo} alt="tour-img" />
-          <span>Featured</span>
+          {featured && <span>Featured</span>}
         </div>
-      </Card>
-      <CardBody>
+        <CardBody>
         <div className="card__top d-flex align-items-center justify-content-between" >
-          <span className="tour__location d-flex align-items-center gap-1"><i class="ri-map-pin-line"></i>{city}</span>
-          <span className="tour-rating d-flex align-items-center gap-1"><i class="ri-star-line"></i>{avgRating}{" "}
-          <span>({review?.length})</span>
+          <span className="tour__location d-flex align-items-center gap-1"><i class="ri-map-pin-fill"></i>{city}</span>
+          <span className="tour-rating d-flex align-items-center gap-1"><i class="ri-star-fill"></i>{avgRating===0?null :avgRating}{totalRating===0?'Not rated':<span>({reviews.length})</span>}
+          
           </span>
 
         </div>
@@ -31,6 +31,8 @@ const TourCard = ({tour}) => {
           </button>
         </div>
       </CardBody>
+      </Card>
+
     </div>
   )
 }
