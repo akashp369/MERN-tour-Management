@@ -58,7 +58,7 @@
   export const getSingleTour=async(req, res)=>{
     const id=req.params.id;
     try {
-        const tour=await Tour.findById(id)
+        const tour=await Tour.findById(id).populate("reviews")
         res.status(200).json({
             sucess:true,
             message:"Successfully",
@@ -76,7 +76,7 @@
     const page=parseInt(req.query?.page)
     console.log(page)
     try {
-         const tours=await Tour.find({}).skip(page*8).limit(8)
+         const tours=await Tour.find({}).populate("reviews").skip(page*8).limit(8)
         res.status(200).json({
             sucess:true,
             message:"Successful",
@@ -96,7 +96,7 @@
     const distance=parseInt(req.query.distance)
     const maxGroupSize=parseInt(req.query.maxGroupSize)
     try {
-      const tours=await Tour.find({city, distance:{$gte:distance}, maxGroupSize:{$gte:maxGroupSize}})
+      const tours=await Tour.find({city, distance:{$gte:distance}, maxGroupSize:{$gte:maxGroupSize}}).populate("reviews")
       res.status(200).json({
         sucess:true,
         message:"Successful",
@@ -114,7 +114,7 @@
 // get featured Tour
 export const getFeaturedTour=async(req, res)=>{
   try {
-       const tours=await Tour.find({featured:true}).limit(8)
+       const tours=await Tour.find({featured:true}).populate("reviews").limit(8)
       res.status(200).json({
           sucess:true,
           message:"Successful",

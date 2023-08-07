@@ -6,12 +6,20 @@ import cookieParser from 'cookie-parser'
 import tourRouter from './routes/tours.js'
 import userRouter from './routes/users.js'
 import authRouter from './routes/auth.js'
-
-
+import reviewsRouter from './routes/reviews.js'
+import bookingRouter from './routes/bookings.js'
 
 dotenv.config()
 const app =express()
 const port =process.env.PORT || 8000;
+
+
+const coreOptions={
+    origin:true,
+    Credentials:true,
+}
+
+
 
 // database coonection
 mongoose.set("strictQuery", false)
@@ -36,11 +44,13 @@ app.get('/', (req, res)=>{
 
 // middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors(coreOptions))
 app.use(cookieParser())
-app.use('/auth', authRouter);
-app.use('/tours', tourRouter);
-app.use('/users', userRouter)
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/review', reviewsRouter)
+app.use('/api/v1/booking', bookingRouter)
 
 
 
