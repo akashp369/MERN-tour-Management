@@ -4,13 +4,15 @@ import jwt from 'jsonwebtoken';
 
 // User Registration
 export const Registration =async(req, res)=>{
-    const {username,email,password,photo}= req.body;
+    const {userName,email,password}= req.body;
+    console.log(req.body)
     try {
         const salt= bcrypt.genSaltSync(10)
-        const hash=bcrypt.hashSync(password, salt)
+        const hash= bcrypt.hashSync(password, salt)
         const newUser= new User({
-            username,email,password:hash, photo
+            username:userName,email,password:hash
         })
+        console.log(newUser)
         await newUser.save()
         res.status(200).json({success:true, message:'Successfully Created'})
         
