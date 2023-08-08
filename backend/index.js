@@ -16,7 +16,7 @@ const port =process.env.PORT || 8000;
 
 const coreOptions={
     origin:true,
-    Credentials:true,
+    credentials:true,
 }
 
 
@@ -44,7 +44,10 @@ app.get('/', (req, res)=>{
 
 // middleware
 app.use(express.json())
-app.use(cors(coreOptions))
+app.use(cors({
+    origin: true,
+    credentials: true, 
+}))
 app.use(cookieParser())
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/tours', tourRouter);
