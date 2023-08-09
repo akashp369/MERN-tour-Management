@@ -8,7 +8,8 @@ import { BASE_URL } from '../../utils/config';
 const Booking = ({tour, avgRating}) => {
     const{price, reviews, title}=tour
     const navigate=useNavigate()
-    const {user}= useContext(AuthContext)
+    const {user, token}= useContext(AuthContext)
+    console.log(user, token)
     const [booking, setBooking]=useState({
         userId:user && user._id,
         useEmail:user && user.email,
@@ -41,6 +42,7 @@ const Booking = ({tour, avgRating}) => {
                 body:JSON.stringify(booking)
               })
             const result= await res.json()
+            console.log(result)
             if(!res.ok) {
                 return alert(result.message)
             }
