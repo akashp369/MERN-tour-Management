@@ -48,7 +48,7 @@ app.use(cors({
     origin: true,
     credentials: true,
     sameSite: "None",
-    domains: "https://cute-plum-stingray-yoke.cyclic.app",
+    domains: "http://localhost:3000",
   }))
 app.use(cookieParser())
 app.use('/api/v1/auth', authRouter);
