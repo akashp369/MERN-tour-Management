@@ -46,8 +46,10 @@ app.get('/', (req, res)=>{
 app.use(express.json())
 app.use(cors({
     origin: true,
-    credentials: true, 
-}))
+    credentials: true,
+    sameSite: "None",
+    domains: "https://cute-plum-stingray-yoke.cyclic.app",
+  }))
 app.use(cookieParser())
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/tours', tourRouter);

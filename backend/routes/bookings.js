@@ -5,9 +5,9 @@ import { createBooking, getAllBooking, getBooking } from '../controllers/bookinC
 
 const router=express.Router()
 
-router.post('/' ,createBooking)
-router.get("/:id", getBooking)
-router.get('/', getAllBooking)
+router.post('/' , verifyUser ,createBooking)
+router.get("/:id", verifyUser , getBooking)
+router.get('/', verifyUser , getAllBooking)
 
 export default router
 
